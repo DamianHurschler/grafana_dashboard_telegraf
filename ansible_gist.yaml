@@ -1,0 +1,73 @@
+# Ansible tasks to install and configure telegraf.
+# Damian Hurschler
+
+# Telegraf Installation
+########################
+
+# installation: https://docs.influxdata.com/telegraf/v1.23/install/
+# using smart: https://github.com/influxdata/telegraf/tree/master/plugins/inputs/smart
+
+  - name: Add signing key for telegraf repository
+    become: yes
+    become_method: sudo
+    ansible.builtin.apt_key:
+      url: "https://repos.influxdata.com/influxdata-archive_compat.key"
+      keyring: /etc/apt/trusted.gpg.d/influxdata-archive_compat.gpg
+      state: present
+    tags: telegraf
+
+  - name: Add influxdata repository into sources list
+    become: yes
+    become_method: sudo
+    ansible.builtin.apt_repository:
+      repo: deb [signed-by=/etc/apt/trusted.gpg.d/influxdata-archive_compat.gpg] https://repos.influxdata.com/debian stable main
+      filename: /etc/apt/sources.list.d/influxdata.list
+      state: present
+    tags: telegraf
+
+  - name: Install telegraf packages
+    become: yes
+    become_method: sudo
+    ansible.builtin.package:
+      name:
+        - telegraf
+        - smartmontools # for HDD SMART data
+        - nvme-cli # for nvme health stats
+        - lm-sensors # for additional sensor data like fan speeds.
+      state: present
+      update_cache: true
+      force_apt_get: true
+    tags: telegraf
+
+  - name: Copy telegraf config files into place
+    become: yes
+    become_method: sudo
+    ansible.builtin.copy:
+      src: "{{ item }}"
+      dest: /etc/telegraf/telegraf.conf
+      force: yes # overwrite
+    loop: 
+      - ./telegraf.conf
+    tags: telegraf
+
+  - name: Allow use of smartctl and nvme-cli which require sudo
+    become: yes
+    become_method: sudo
+    community.general.sudoers:
+      name: Allow telegraf to use smartctl and nvme-cli with sudo for metrics gathering
+      user: telegraf
+      commands:
+        - /usr/sbin/smartctl
+        - /usr/sbin/nvme
+      nopassword: yes
+      state: present
+    tags: telegraf
+
+  - name: Restart Telegraf to pick up config changes
+    become: yes
+    become_method: sudo
+    ansible.builtin.systemd:
+      state: restarted
+      daemon_reload: yes
+      name: telegraf
+    tags: telegraf
