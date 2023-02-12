@@ -1784,7 +1784,7 @@
           "measurement": "sens_temps",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "from(bucket: \"telegraf\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"processes\")\n  |> filter(fn: (r) => r[\"_field\"] == \"stopped\" or r[\"_field\"] == \"blocked\" or r[\"_field\"] == \"dead\" or r[\"_field\"] == \"idle\" or r[\"_field\"] == \"running\" or r[\"_field\"] == \"sleeping\" or r[\"_field\"] == \"zombies\" or r[\"_field\"] == \"total\" or r[\"_field\"] == \"paging\")\n  |> filter(fn: (r) => r[\"host\"] == \"${host}\")\n  |> drop(columns: [\"_measurement\", \"_start\", \"_stop\", \"host\"])\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> yield(name: \"mean\")",
+          "query": "from(bucket: \"${bucket}\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"processes\")\n  |> filter(fn: (r) => r[\"_field\"] == \"stopped\" or r[\"_field\"] == \"blocked\" or r[\"_field\"] == \"dead\" or r[\"_field\"] == \"idle\" or r[\"_field\"] == \"running\" or r[\"_field\"] == \"sleeping\" or r[\"_field\"] == \"zombies\" or r[\"_field\"] == \"total\" or r[\"_field\"] == \"paging\")\n  |> filter(fn: (r) => r[\"host\"] == \"${host}\")\n  |> drop(columns: [\"_measurement\", \"_start\", \"_stop\", \"host\"])\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> yield(name: \"mean\")",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
