@@ -39,6 +39,15 @@
       force_apt_get: true
     tags: telegraf
 
+  - name: add telegraf user to docker group, so it can access "unix:///var/run/docker.sock" and docker daemon metrics
+    become: yes
+    become_method: sudo
+    ansible.builtin.user:
+      name: telegraf
+      groups: docker
+      append: yes
+    tags: telegraf
+
   - name: Copy telegraf config files into place
     become: yes
     become_method: sudo
