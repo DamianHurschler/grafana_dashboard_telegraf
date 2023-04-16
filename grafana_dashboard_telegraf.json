@@ -6754,7 +6754,7 @@
           "measurement": "disk_space",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "from(bucket: \"${bucket}\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"disk\")\n  |> filter(fn: (r) => r[\"_field\"] == \"inodes_total\" or r[\"_field\"] == \"inodes_used\")\n  |> filter(fn: (r) => r[\"host\"] == \"Supermicro\")\n  |> filter(fn: (r) => r[\"path\"] == \"${mount_point}\")\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> drop(columns: [\"_measurement\", \"_start\", \"_stop\", \"fstype\", \"host\", \"mode\", \"path\"])\n  |> pivot(rowKey: [\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\n  |> yield(name: \"last\")",
+          "query": "from(bucket: \"${bucket}\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"disk\")\n  |> filter(fn: (r) => r[\"_field\"] == \"inodes_total\" or r[\"_field\"] == \"inodes_used\")\n  |> filter(fn: (r) => r[\"host\"] == \"${host}\")\n  |> filter(fn: (r) => r[\"path\"] == \"${mount_point}\")\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> drop(columns: [\"_measurement\", \"_start\", \"_stop\", \"fstype\", \"host\", \"mode\", \"path\"])\n  |> pivot(rowKey: [\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\n  |> yield(name: \"last\")",
           "rawQuery": true,
           "refId": "B",
           "resultFormat": "time_series",
