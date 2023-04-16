@@ -58,6 +58,9 @@ In case there were changes to the gathered data (which may well be the case on a
 
 ## Tags
 
+#### v3.2 Fixed inodes panel
+  - The inodes query was updated to correctly call the ${host} variable instead of a hardcoded hostname.
+
 #### v3.1 Expanded panels for smart attributes
   - Added installation, usage and upgrade instructions, plus dashboard export instructions to readme
   - Added variable to read all smart attribute names to make them selectable and allow automatic replication of panels for each selected attribute. Updated screenshots in readme.
