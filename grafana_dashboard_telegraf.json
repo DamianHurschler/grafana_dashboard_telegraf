@@ -6176,7 +6176,115 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 377
+        "y": 359
+      },
+      "id": 1817,
+      "panels": [],
+      "title": "smart_attribute_name - Graphical Detail",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB_V2}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 3,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 360
+      },
+      "id": 1589,
+      "options": {
+        "legend": {
+          "calcs": [
+            "range",
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "repeat": "smart_attribute_name",
+      "repeatDirection": "v",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB_V2}"
+          },
+          "query": "from(bucket: \"${bucket}\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"smart_attribute\")\n  |> filter(fn: (r) => r[\"_field\"] == \"raw_value\")\n  |> filter(fn: (r) => r[\"name\"] == \"${smart_attribute_name}\")\n  |> filter(fn: (r) => r[\"host\"] == \"${host}\")\n  |> keep(columns: [\"_value\", \"_time\", \"device\", \"id\", \"model\", \"serial_no\"])\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)",
+          "refId": "A"
+        }
+      ],
+      "title": "smart_attribute - ${smart_attribute_name}",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 780
       },
       "id": 898,
       "panels": [],
@@ -7000,6 +7108,26 @@
         "tagsQuery": "",
         "type": "query",
         "useTags": false
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "influxdb",
+          "uid": "${DS_INFLUXDB_V2}"
+        },
+        "definition": "from(bucket: \"telegraf\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"smart_attribute\")\n  |> filter(fn: (r) => r[\"_field\"] == \"raw_value\")\n  |> filter(fn: (r) => r[\"host\"] == \"supermicro\")\n  |> last() // return only one list item per value\n  |> keep(columns: [\"name\"]) // drop all but this column\n  |> rename(columns: {name: \"_value\"}) // rename to return a _value column\n  |> group()",
+        "hide": 0,
+        "includeAll": true,
+        "label": "smart_attribute_name",
+        "multi": true,
+        "name": "smart_attribute_name",
+        "options": [],
+        "query": "from(bucket: \"telegraf\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"smart_attribute\")\n  |> filter(fn: (r) => r[\"_field\"] == \"raw_value\")\n  |> filter(fn: (r) => r[\"host\"] == \"supermicro\")\n  |> last() // return only one list item per value\n  |> keep(columns: [\"name\"]) // drop all but this column\n  |> rename(columns: {name: \"_value\"}) // rename to return a _value column\n  |> group()",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
       }
     ]
   },
