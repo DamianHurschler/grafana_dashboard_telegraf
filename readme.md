@@ -41,6 +41,20 @@ The telegraf installation can be rolled out to a fleet of servers or PCs and all
 ![Screenshot](screenshot/../screenshots/Screenshot%20from%202023-02-11%2017-42-05.png)
 ![Screenshot](screenshot/../screenshots/Screenshot%20from%202023-02-11%2017-42-40.png)
 
+## Contributing
+
+- Please report bugs as issues on GitHub. If you have an idea how to improve it, please include that too!
+- I'm not convinced the structure of the dashboard json file lends itself well for pull requests and it may be simpler to just add a description and maybe a picture to a comment when asking for features.
+
+## Dashboard export
+
+It is possible to review and modify the 'json model' of the dashboard in the dashboard settings. However, this json representation of the dashboard is not portable to other installations. In order to create a 'generalised' export, wich can be imported on other systems, these steps must be taken:
+
+- In Grafana click the 'Share dashboard or panel' button in the top left cordner (three connected circles)
+- Select 'export'
+- Enable 'Export for sharing externally'
+- Select 'Save to file'
+
 ## License
 
 MIT
