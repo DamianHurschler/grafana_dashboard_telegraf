@@ -21,6 +21,7 @@ The data is stored in an influxdb 2.x and queried using Flux.
 ![Screenshot](screenshot/../screenshots/Screenshot%20from%202023-02-13%2022-54-01.png)
 ![Screenshot](screenhot/../screenshots/Screenshot%20from%202023-02-11%2017-38-17.png)
 ![Screenshot](screenhot/../screenshots/Screenshot%20from%202023-02-11%2017-38-47.png)
+![Screenshot](screenhot/../screenshots/Netstat.png)
 ![Screenshot](screenshot/../screenshots/Screenshot%20from%202023-02-11%2017-39-24.png)
 ![Screenshot](screenshot/../screenshots/Screenshot%20from%202023-02-11%2017-40-15.png)
 ![Screenshot](screenshot/../screenshots/Screenshot%20from%202023-02-11%2017-40-29.png)
