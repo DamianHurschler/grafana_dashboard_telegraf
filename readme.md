@@ -39,18 +39,13 @@ In case there were changes to the gathered data (which may well be the case on a
 ## Screenshots
 
 ![Screenshot](screenshots/Screenshot%20from%202023-02-11%2017-37-46.png)
-![Screenshot](screenhot/../screenshots/Screenshot%20from%202023-02-11%2017-38-05.png)
-![Screenshot](screenshot/../screenshots/Screenshot%20from%202023-02-13%2022-52-55.png)
-![Screenshot](screenshot/../screenshots/Screenshot%20from%202023-02-13%2022-53-18.png)
-![Screenshot](screenshot/../screenshots/Screenshot%20from%202023-02-13%2022-54-01.png)
-![Screenshot](screenhot/../screenshots/Screenshot%20from%202023-02-11%2017-38-17.png)
-![Screenshot](screenhot/../screenshots/Screenshot%20from%202023-02-11%2017-38-47.png)
-![Screenshot](screenhot/../screenshots/Netstat.png)
-![Screenshot](screenshot/../screenshots/Screenshot%20from%202023-02-11%2017-39-24.png)
-![Screenshot](screenshot/../screenshots/Screenshot%20from%202023-02-11%2017-40-15.png)
-![Screenshot](screenshot/../screenshots/Screenshot%20from%202023-02-11%2017-40-29.png)
-![Screenshot](screenshot/../screenshots/Screenshot%20from%202023-02-11%2017-42-05.png)
-![Screenshot](screenshot/../screenshots/Screenshot%20from%202023-02-11%2017-42-40.png)
+![Screenshot](/screenshots/netstat.png)
+![Screenshot](/screenshots/drives_summary.png)
+![Screenshot](/screenshots/smart_device_all_overview.png)
+![Screenshot](/screenshots/smart_device_numeric_detail.png)
+![Screenshot](/screenshots/smart_attribute_reallocated_sector.png)
+![Screenshot](/screenshots/smart_attribute_temperature.png)
+![Screenshot](/screenshots/smart_attribute_total_lba_written.png)
 
 ## Contributing
 
