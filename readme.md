@@ -21,9 +21,20 @@ The data is stored in an influxdb 2.x and queried using Flux.
   - select 'upload dashboard JSON file' and select the **grafana_dashboard.json** from this repository
   - select the influsdb_v2 data source where telegraf is sending it's metrics to
   - Open the dashboard and at the top select the bucket to which telegraf is sending it's metrics to
+  - Review all the metrics and collapse or delete the sections not relevant to you, or where your setup does not provide dat.
 
 At this point the dashboard and it's variables should explore the schema and data in the bucket and find all hosts and devices for which metrics are available.
 The telegraf installation can be rolled out to a fleet of servers or PCs and all of them monitored in one dashboard. The **ansible_gist.yaml** in this repository allows automated rollout of the telegraf installation to more hosts by using ansible.
+
+## Upgrading
+
+### Dashboard
+
+If a new release tag comes out, simply create a new dashboard and import the updated dashboard.json file. This provides a new dashboard with all the features.
+
+### Telegraf configuration
+
+In case there were changes to the gathered data (which may well be the case on any major release tag), replace the telegraf.conf file with the new version and restart the telegraf service (or execute the command in the ansible_gist.yaml to automate the process).
 
 ## Screenshots
 
