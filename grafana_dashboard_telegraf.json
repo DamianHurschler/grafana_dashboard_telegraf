@@ -5862,7 +5862,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 10,
+        "h": 7,
         "w": 24,
         "x": 0,
         "y": 301
@@ -5935,10 +5935,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 12,
+        "h": 8,
         "w": 24,
         "x": 0,
-        "y": 311
+        "y": 308
       },
       "id": 1023,
       "options": {
@@ -5969,7 +5969,7 @@
           "refId": "A"
         }
       ],
-      "title": "All Drives - SMART Health Status",
+      "title": "smart_device - all - SMART Health Status",
       "type": "table"
     },
     {
@@ -5978,11 +5978,11 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 323
+        "y": 316
       },
       "id": 1049,
       "panels": [],
-      "title": "Drive SMART Data",
+      "title": "smart_device - all - Numeric Overview",
       "type": "row"
     },
     {
@@ -6021,10 +6021,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 13,
+        "h": 9,
         "w": 24,
         "x": 0,
-        "y": 324
+        "y": 317
       },
       "id": 1024,
       "options": {
@@ -6040,7 +6040,7 @@
         "sortBy": [
           {
             "desc": false,
-            "displayName": "model"
+            "displayName": "device"
           }
         ]
       },
@@ -6051,12 +6051,25 @@
             "type": "influxdb",
             "uid": "${DS_INFLUXDB_V2}"
           },
-          "query": "from(bucket: \"${bucket}\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"smart_device\")\n  |> filter(fn: (r) => r[\"host\"] == \"${host}\")\n  |> filter(fn: (r) => r[\"_field\"] == \"read_error_rate\" or r[\"_field\"] == \"seek_error_rate\" or r[\"_field\"] == \"temp_c\" or r[\"_field\"] == \"udma_crc_errors\")\n  |> last()\n  |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\n  |> group()\n  |> drop(columns: [\"_measurement\", \"_start\", \"_stop\", \"_time\", \"enabled\", \"host\"])\n  |> yield(name: \"last\")",
+          "query": "from(bucket: \"${bucket}\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"smart_device\")\n  |> filter(fn: (r) => r[\"host\"] == \"${host}\")\n  |> drop(columns: [\"capacity\", \"exit_status\", \"wwn\", \"health_ok\", \"exit_status\"])\n  |> last()\n  |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\n  |> group()\n  |> drop(columns: [\"_measurement\", \"_start\", \"_stop\", \"_time\", \"enabled\", \"host\"])\n  |> yield(name: \"last\")",
           "refId": "A"
         }
       ],
-      "title": "All Drives - SMART Basic Parameters",
+      "title": "smart_device - SMART Basic Parameters",
       "type": "table"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 326
+      },
+      "id": 1703,
+      "panels": [],
+      "title": "smart_device - Numeric Detail",
+      "type": "row"
     },
     {
       "datasource": {
@@ -6080,7 +6093,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -6130,10 +6144,10 @@
         ]
       },
       "gridPos": {
-        "h": 20,
+        "h": 16,
         "w": 8,
         "x": 0,
-        "y": 337
+        "y": 327
       },
       "id": 1025,
       "maxPerRow": 3,
@@ -6167,7 +6181,7 @@
           "refId": "A"
         }
       ],
-      "title": "All Drives - SMART Detailed Attributes - $smart_device",
+      "title": "smart_device - $smart_device",
       "type": "table"
     },
     {
@@ -6288,7 +6302,7 @@
       },
       "id": 898,
       "panels": [],
-      "title": "Drive Activity",
+      "title": "io_device - activity",
       "type": "row"
     },
     {
@@ -6336,7 +6350,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -6352,7 +6367,7 @@
         "h": 12,
         "w": 8,
         "x": 0,
-        "y": 378
+        "y": 781
       },
       "id": 14,
       "maxPerRow": 3,
@@ -6439,11 +6454,11 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 426
+        "y": 829
       },
       "id": 913,
       "panels": [],
-      "title": "Drive Space and Inodes",
+      "title": "mount_point - Space and Inodes",
       "type": "row"
     },
     {
@@ -6493,7 +6508,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -6529,7 +6545,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 427
+        "y": 830
       },
       "id": 87,
       "maxPerRow": 3,
@@ -6656,7 +6672,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -6692,7 +6709,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 427
+        "y": 830
       },
       "id": 957,
       "maxPerRow": 3,
@@ -6779,7 +6796,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 463
+        "y": 866
       },
       "id": 1130,
       "panels": [],
@@ -6808,7 +6825,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -6823,7 +6841,7 @@
         "h": 8,
         "w": 11,
         "x": 0,
-        "y": 464
+        "y": 867
       },
       "id": 1106,
       "options": {
@@ -6860,7 +6878,7 @@
         "h": 8,
         "w": 12,
         "x": 11,
-        "y": 464
+        "y": 867
       },
       "id": 1220,
       "options": {
@@ -6886,7 +6904,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 472
+        "y": 875
       },
       "id": 786,
       "panels": [],
