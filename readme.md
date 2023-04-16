@@ -56,11 +56,36 @@ In case there were changes to the gathered data (which may well be the case on a
 ![Screenshot](/screenshots/Screenshot%20from%202023-02-11%2017-42-05.png)
 ![Screenshot](/screenshots/Screenshot%20from%202023-02-11%2017-42-40.png)
 
+## Tags
+
+#### v3.1 Expanded panels for smart attributes
+  - Added installation, usage and upgrade instructions, plus dashboard export instructions to readme
+  - Added variable to read all smart attribute names to make them selectable and allow automatic replication of panels for each selected attribute. Updated screenshots in readme.
+  - Now enables 'multi-value' for all variables where it makes sense, like smart attributes, drives, containers, etc.
+  - Renaming of several section and panel headers to make it more clear which variable changes will affect which graphs.
+  - Added these 'tag notes'
+  
+#### v3.0 Added netstat metrics
+  - Enabled netstat in docker config file to gather the data
+  - Added dashboard panel for netstat
+  - Included minor dashboard.json changes caused by Grafana update (Grafana included it in the exported json file)
+  Bugfix:
+  - Also enabled the docker metrics in telegraf.conf, which were missing.
+
+#### v2.1 Bug fix
+  - To read docker metrics the 'telegraf' user must have access to the docker engine. Added telegraf to the 'docker' group.
+  
+#### v2.0 Added Docker metrics
+  - Telegraf gets access to docker engine to pull all metrics
+  - Variable added in grafana to detect and select all containers
+  - Added docker engine overview and container specific metrics
+  
+#### v1.0 Initial release
 
 ## Contributing
 
 - Please report bugs as issues on GitHub. If you have an idea how to improve it, please include that too!
-- I'm not convinced the structure of the dashboard json file lends itself well for pull requests and it may be simpler to just add a description and maybe a picture to a comment when asking for features.
+- When providing a pull request, please make sure to use a clean copy and extract the post-change dashboard.json as instructed below.
 
 ## Dashboard export
 
